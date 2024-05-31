@@ -5,6 +5,7 @@ import InvoiceRepository from "./invoice.repository";
 import Id from "../../@shared/domain/value-object/id.value-object";
 import Invoice from "../domain/invoice";
 import Address from "../../@shared/domain/value-object/address";
+import InvoiceItems from "../domain/invoice-items";
 
 describe("InvoiceRepository test", () => {
     let sequelize: Sequelize;
@@ -78,5 +79,43 @@ describe("InvoiceRepository test", () => {
         expect(findInvoice.items[1].name).toEqual("Invoice 2 item 2");
         expect(findInvoice.items[1].price).toEqual(200);
 
+    })
+
+    it("should generate an invoice", async () => {
+        const invoiceRepository = new InvoiceRepository();
+        const invoice = new Invoice({
+            id: new Id("7"),
+            name: "Invoice 1",
+            document: "Invoice 1 document",
+            address: new Address(
+                "Invoice 1 street",
+                "1",
+                "Invoice 1 complement",
+                "Invoice 1 city",
+                "Invoice 1 state",
+                "Invoice 1 zipCode",
+            ),
+            items: [
+                new InvoiceItems({
+                    id: new Id("1"),
+                    name: "Invoice 1 item 1",
+                    price: 100
+                }),
+                new InvoiceItems({
+                    id: new Id("2"),
+                    name: "Invoice 2 item 2",
+                    price: 200
+                })
+            ]
+        });
+
+        const output = await invoiceRepository.generate(invoice);
+        
+        expect(output.id).toBeDefined();
+        expect(output.name).toEqual("Invoice 1");
+        expect(output.document).toEqual("Invoice 1 document");
+        expect(output.address.street).toEqual("Invoice 1 street");
+        expect(output.address.number).toEqual("1");
+        expect(output.address.complement).toEqual("Invoice 1 complement");
     })
 })
