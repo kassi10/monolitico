@@ -8,10 +8,7 @@ import { GenerateInvoiceUseCaseInputDto, GenerateInvoiceUseCaseOutputDto } from 
 
 export default class GenerateInvoiceUseCase implements UseCaseInterface {
 
-    private _invoiceRepository: InvoiceGateway
-    constructor(private invoiceRepository: InvoiceGateway) {
-        this._invoiceRepository = invoiceRepository
-    }
+    constructor(private invoiceRepository: InvoiceGateway) { }
     async execute(input: GenerateInvoiceUseCaseInputDto): Promise<GenerateInvoiceUseCaseOutputDto> {
         const invoice = new Invoice({
             name: input.name,
@@ -26,26 +23,26 @@ export default class GenerateInvoiceUseCase implements UseCaseInterface {
             ),
             items: input.items.map((item) => (
                 new InvoiceItems({
-                    id:new Id(item.id),
+                    id: new Id(item.id),
                     name: item.name,
                     price: item.price
                 })
             )),
         });
-        
-        const output = await this._invoiceRepository.generate(invoice);
+
+        const output = await this.invoiceRepository.generate(invoice);
         return {
             id: output.id.id,
             name: output.name,
             document: output.document,
-        
+
             street: output.address.street,
             number: output.address.number,
             complement: output.address.complement,
             city: output.address.city,
             state: output.address.state,
             zipCode: output.address.zipCode,
-            
+
             items: output.items.map(item => ({
                 id: item.id.id,
                 name: item.name,
