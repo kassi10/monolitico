@@ -2,7 +2,7 @@ import Id from "../../../@shared/domain/value-object/id.value-object";
 import UseCaseInterface from "../../../@shared/usecase/use-case.interface";
 import ClientAdmFacadeInterface from "../../../client-adm/facade/client-adm.facade.interface";
 import ProductAdmFacadeInterface from "../../../product-adm/facade/product-adm.facade.interface";
-import StoreCatalogFacade from "../../../store-catalog/facade/store-catalog.facade";
+import StoreCatalogFacadeInterface from "../../../store-catalog/facade/store-catalog.facade.interface";
 import Client from "../../domain/client.entity";
 import Order from "../../domain/order.entity";
 import Product from "../../domain/product.entity";
@@ -12,13 +12,13 @@ import { PlaceOrderInputDto, PlaceOrderOutputDto } from "./place-order.dto";
 export default class PlaceOrderUseCase implements UseCaseInterface {
   private _clientFacade: ClientAdmFacadeInterface;
   private _productFacade: ProductAdmFacadeInterface;
-  private _catalogFacade: StoreCatalogFacade;
+  private _catalogFacade: StoreCatalogFacadeInterface;
   private _repository: CheckoutGateway;
 
   constructor(
     clientFacade: ClientAdmFacadeInterface,
     productFacade: ProductAdmFacadeInterface,
-    catalogFacade: StoreCatalogFacade,
+    catalogFacade: StoreCatalogFacadeInterface,
     repository: CheckoutGateway
   ) {
     this._clientFacade = clientFacade;

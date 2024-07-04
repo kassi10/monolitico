@@ -117,5 +117,7 @@ describe("InvoiceRepository test", () => {
         expect(output.address.street).toEqual("Invoice 1 street");
         expect(output.address.number).toEqual("1");
         expect(output.address.complement).toEqual("Invoice 1 complement");
+        expect(output.items.length).toEqual(2);
+        expect(output.items[0].name).toEqual("Invoice 1 item 1");
     })
 })
