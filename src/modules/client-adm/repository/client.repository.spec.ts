@@ -50,7 +50,7 @@ describe("ClientRepository test", () => {
       id: new Id("1"),
       name: "Client 1",
       email: "x@x.com",
-      address: "Address 1",
+      address: "Address 1"
     });
 
     const repository = new ClientRepository();

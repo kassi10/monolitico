@@ -14,6 +14,7 @@ export interface FindClientFacadeOutputDto {
   name: string;
   email: string;
   address: string;
+  document: string;
 }
 
 export default interface ClientAdmFacadeInterface {

@@ -26,6 +26,7 @@ export default class AddClientUseCase {
       name: client.name,
       email: client.email,
       address: client.address,
+      document: client.document,
       createdAt: client.createdAt,
       updatedAt: client.updatedAt,
     };

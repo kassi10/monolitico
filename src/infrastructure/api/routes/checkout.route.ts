@@ -2,31 +2,45 @@
 
 import express from "express";
 import PlaceOrderUseCase from "../../../modules/checkout/usecase/place-order/place-order.usecase";
-import ClientAdmFacade from "../../../modules/client-adm/facade/client-adm.facade";
-import ProductAdmFacade from "../../../modules/product-adm/facade/product-adm.facade";
-import StoreCatalogFacade from "../../../modules/store-catalog/facade/store-catalog.facade";
+import OrderRepository from "../../../modules/checkout/repository/order.repository";
+import ClientAdmFacadeFactory from "../../../modules/client-adm/factory/facade.factory";
+import ProductAdmFacadeFactory from "../../../modules/product-adm/factory/facade.factory";
+import StoreCatalogFacadeFactory from "../../../modules/store-catalog/factory/facade.factory";
+import PaymentFacadeFactory from "../../../modules/payment/factory/payment.facade.factory";
+import InvoiceFacadeFactory from "../../../modules/invoice/factory/invoice.factory";
 
 
 export const checkoutRoute = express.Router()
 
 checkoutRoute.post("/", async (req, res) =>  {
-    // const usecase = new PlaceOrderUseCase(
-    //     new ClientAdmFacade(),
-    //     new ProductAdmFacade(),
-    //     new StoreCatalogFacade(),
-    //     new 
-    // )
 
-    // try {
-    //     const clientInputDto = {
-    //         name: req.body.name,
-    //         email: req.body.email,
-    //         address: req.body.address
-    //     }
-    //     const output = await usecase.execute(clientInputDto)
+    const clientFacade = ClientAdmFacadeFactory.create()
+    const productFacade = ProductAdmFacadeFactory.create()
+    const storeCatalog = StoreCatalogFacadeFactory.create()
+    const paymentFacade = PaymentFacadeFactory.create()
+    const invoiceFacade = InvoiceFacadeFactory.create()
 
-    //     res.send(output)
-    // } catch (err) {
-    //     res.status(500).send(err)
-    // }
+    const usecase = new PlaceOrderUseCase(
+        clientFacade,
+        productFacade,
+        storeCatalog,
+        invoiceFacade,
+        paymentFacade,
+        new OrderRepository()
+    )
+
+    try {
+        const inputDto = {
+            clientId: req.body.client_id,
+            products: req.body.products.map((p:any) => {
+                return { productId: p.product_id }
+            })
+        }
+        const output = await usecase.execute(inputDto)
+
+        res.send(output)
+    } catch (err) {
+        console.log(err)
+        res.status(500).send(err)
+    }
 })

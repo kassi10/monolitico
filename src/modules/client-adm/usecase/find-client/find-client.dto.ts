@@ -7,4 +7,5 @@ export interface FindClientOutputDto {
   name: string;
   email: string;
   address: string;
+  document: string;
 }

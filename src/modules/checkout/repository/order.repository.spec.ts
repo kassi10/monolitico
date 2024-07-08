@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize-typescript";
 import OrderItemModel from "./order-item.model";
 import OrderModel from "./order.model";
 import OrderRepository from "./order.repository";
-import ClientCheckoutModel from "./client.model";
+import { ClientCheckoutModel } from "./client-checkout.model";
 import Order from "../domain/order.entity";
 import Id from "../../@shared/domain/value-object/id.value-object";
 import Product from "../domain/product.entity";

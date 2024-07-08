@@ -1,4 +1,4 @@
-import { Column, Model, PrimaryKey, Table, HasMany, BelongsTo } from "sequelize-typescript";
+import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
 
 @Table({
     modelName: 'client-checkout-table',
@@ -6,7 +6,7 @@ import { Column, Model, PrimaryKey, Table, HasMany, BelongsTo } from "sequelize-
     timestamps: false,
 })
 
-export default class ClientCheckoutModel extends Model {
+export class ClientCheckoutModel extends Model {
     @PrimaryKey
     @Column({ allowNull: false })
     id: string;
@@ -19,4 +19,10 @@ export default class ClientCheckoutModel extends Model {
 
     @Column({ allowNull: false })
     address: string;
+
+    @Column({ allowNull: true })
+    createdAt: Date;
+  
+    @Column({ allowNull: true })
+    updatedAt: Date;
 }

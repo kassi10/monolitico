@@ -27,7 +27,7 @@ export default class OrderRepository implements CheckoutGateway {
             await OrderItemModel.bulkCreate(orderItems);
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
     
     }
@@ -37,7 +37,7 @@ export default class OrderRepository implements CheckoutGateway {
             include: ["client", "items"],
         });
 
-        console.log(orderModel)
+        // console.log(orderModel)
         return new Order({
             id: new Id(id),
             client: new Client({

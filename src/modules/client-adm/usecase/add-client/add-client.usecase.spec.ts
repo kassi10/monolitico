@@ -17,6 +17,7 @@ describe("Add Client usecase unit test", () => {
       name: "Client 1",
       email: "x@x.com",
       address: "Address 1",
+      document: "Document 1",
     };
 
     const result = await usecase.execute(input);

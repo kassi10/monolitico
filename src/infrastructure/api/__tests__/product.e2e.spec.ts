@@ -1,14 +1,32 @@
-import { app, sequelize } from "../express";
+import { ProductModel } from "../../../modules/product-adm/repository/product.model";
+import { app } from "../express";
+import { Sequelize } from "sequelize-typescript"
 import request from "supertest";
-
+import { Umzug } from "umzug"
+import { migrator } from "../test-migrations/config-migrations/migrator";
 describe("E2E test for product", () => {
-
+    let sequelize: Sequelize
+    let migration: Umzug<any>;
     beforeEach(async () => {
-        await sequelize.sync({ force: true })
+        sequelize = new Sequelize({
+            dialect: 'sqlite',
+            storage: ":memory:",
+            logging: false
+          })
+          
+        sequelize.addModels([ProductModel])
+        migration = migrator(sequelize)
+        await migration.up()
+        await sequelize.sync({ force: true });
     })
 
     afterAll(async () => {
-        await sequelize.close()
+        if (!migration || !sequelize) {
+            return 
+          }
+          migration = migrator(sequelize)
+          await migration.down()
+          await sequelize.close()
     })
 
     it("should create a product", async () => {

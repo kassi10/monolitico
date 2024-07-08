@@ -12,7 +12,8 @@ clientRoute.post("/", async (req, res) =>  {
         const clientInputDto = {
             name: req.body.name,
             email: req.body.email,
-            address: req.body.address
+            address: req.body.address,
+            document: req.body.document
         }
         const output = await usecase.execute(clientInputDto)
 

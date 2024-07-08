@@ -12,6 +12,7 @@ export default class FindClientUseCase {
       name: client.name,
       email: client.email,
       address: client.address,
+      document: client.document
     };
   }
 }
