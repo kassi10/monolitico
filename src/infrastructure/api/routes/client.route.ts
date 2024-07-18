@@ -10,6 +10,7 @@ clientRoute.post("/", async (req, res) =>  {
 
     try {
         const clientInputDto = {
+            
             name: req.body.name,
             email: req.body.email,
             address: req.body.address,

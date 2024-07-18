@@ -28,12 +28,13 @@ checkoutRoute.post("/", async (req, res) =>  {
         paymentFacade,
         new OrderRepository()
     )
+    console.log(req.body)
 
     try {
         const inputDto = {
-            clientId: req.body.client_id,
+            clientId: req.body.clientId,
             products: req.body.products.map((p:any) => {
-                return { productId: p.product_id }
+                return { productId: p.productId }
             })
         }
         const output = await usecase.execute(inputDto)

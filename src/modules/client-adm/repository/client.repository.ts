@@ -10,6 +10,7 @@ export default class ClientRepository implements ClientGateway {
       name: client.name,
       email: client.email,
       address: client.address,
+      document: client.document,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -28,6 +29,7 @@ export default class ClientRepository implements ClientGateway {
       name: client.name,
       email: client.email,
       address: client.address,
+      document: client.document
     });
   }
 }

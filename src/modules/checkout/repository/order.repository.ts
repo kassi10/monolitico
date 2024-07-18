@@ -10,7 +10,7 @@ export default class OrderRepository implements CheckoutGateway {
         
         const newOrder = await OrderModel.create({
             id: order.id.id,
-            client_id: order.client.id.id,
+            clientId: order.client.id.id,
             status: order.status,
         });
     
@@ -44,7 +44,8 @@ export default class OrderRepository implements CheckoutGateway {
                 id: new Id(orderModel.client.id),
                 name: orderModel.client.name,
                 email: orderModel.client.email,
-                address: orderModel.client.address
+                address: orderModel.client.address,
+                document: orderModel.client.document
             }),
             status: orderModel.status,
             products: orderModel.items.map((item) => {

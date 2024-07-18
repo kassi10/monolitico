@@ -29,6 +29,7 @@ describe("ClientRepository test", () => {
       name: "Client 1",
       email: "x@x.com",
       address: "Address 1",
+      document: '1'
     });
 
     const repository = new ClientRepository();
@@ -43,6 +44,7 @@ describe("ClientRepository test", () => {
     expect(clientDb.name).toBe(client.name);
     expect(clientDb.email).toBe(client.email);
     expect(clientDb.address).toBe(client.address);
+    expect(clientDb.document).toBe(client.document);
   });
 
   it("should find a client", async () => {
@@ -50,7 +52,8 @@ describe("ClientRepository test", () => {
       id: new Id("1"),
       name: "Client 1",
       email: "x@x.com",
-      address: "Address 1"
+      address: "Address 1",
+      document: '1'
     });
 
     const repository = new ClientRepository();
@@ -63,5 +66,6 @@ describe("ClientRepository test", () => {
     expect(result.name).toBe(client.name);
     expect(result.email).toBe(client.email);
     expect(result.address).toBe(client.address);
+    expect(result.document).toBe(client.document);
   });
 });

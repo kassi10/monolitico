@@ -9,7 +9,7 @@ import { ClientCheckoutModel } from "../../modules/checkout/repository/client-ch
 import OrderModel from "../../modules/checkout/repository/order.model";
 import OrderItemModel from "../../modules/checkout/repository/order-item.model";
 import { Umzug } from "umzug"
-import { migrator } from "./test-migrations/config-migrations/migrator";
+import { migrator } from "../../test-migrations/config-migrations/migrator";
 import ProductStoreCatalogModel from "../../modules/store-catalog/repository/product.model";
 
 export const app: Express = express()

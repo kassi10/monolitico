@@ -16,6 +16,7 @@ export default class AddClientUseCase {
       name: input.name,
       email: input.email,
       address: input.address,
+      document: input.document,
     };
 
     const client = new Client(props);

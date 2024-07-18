@@ -8,4 +8,4 @@ const sequelize = new Sequelize({
   logging: true
 })
 
-migrator(sequelize).runAsCLI()
+migrator(sequelize).runAsCLI(["up"])

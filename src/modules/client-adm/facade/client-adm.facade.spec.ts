@@ -32,6 +32,7 @@ describe("ClientAdmFacade test", () => {
       name: "Client 1",
       email: "x@x.com",
       address: "Address 1",
+      document: '1'
     };
 
     await facade.add(input);
@@ -52,6 +53,7 @@ describe("ClientAdmFacade test", () => {
       name: "Client 1",
       email: "x@x.com",
       address: "Address 1",
+      document: '1'
     };
 
     await facade.add(input);
@@ -63,5 +65,6 @@ describe("ClientAdmFacade test", () => {
     expect(client!.name).toBe(input.name);
     expect(client!.email).toBe(input.email);
     expect(client!.address).toBe(input.address);
+    expect(client!.document).toBe(input.document);
   });
 });

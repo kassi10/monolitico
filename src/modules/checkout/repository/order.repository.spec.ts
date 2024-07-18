@@ -38,13 +38,14 @@ describe("OrderRepository test", () => {
             id: "4",
             name: "Client 1",
             email: "email 1",
-            address: "address 1"
+            address: "address 1",
+            document: "document 1"
         });
 
         OrderModel.create(
             {
                 id: "4",
-                client_id: "4",
+                clientId: "4",
                 status: "approved",
                 
             }
@@ -83,7 +84,8 @@ describe("OrderRepository test", () => {
             id: "4",
             name: "Client 1",
             email: "email 1",
-            address: "address 1"
+            address: "address 1",
+            document: "document 1"
         });
 
         const order = new Order(
@@ -93,7 +95,8 @@ describe("OrderRepository test", () => {
                     id: new Id("4"),
                     name: "Client 1",
                     email: "email 1",
-                    address: "address 1"
+                    address: "address 1",
+                    document: "document 1"
                 }),
                 status: "approved",
                 products: [
@@ -116,6 +119,9 @@ describe("OrderRepository test", () => {
 
         expect(output.client.id).toEqual("4");
         expect(output.client.name).toEqual("Client 1");
+        expect(output.client.email).toEqual("email 1");
+        expect(output.client.address).toEqual("address 1");
+        expect(output.client.document).toEqual("document 1");
         expect(output.id).toEqual("5");
         expect(output.status).toEqual("approved");
         expect(output.items[0].id).toEqual("5");

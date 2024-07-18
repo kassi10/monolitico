@@ -18,7 +18,7 @@ export default class OrderModel extends Model {
 
     @ForeignKey(() => ClientCheckoutModel)
     @Column({ allowNull: false })
-    client_id: string;
+    clientId: string;
 
     @Column({ allowNull: false })
     status: string;

@@ -3,7 +3,9 @@ import { app } from "../express";
 import { Sequelize } from "sequelize-typescript"
 import request from "supertest";
 import { Umzug } from "umzug"
-import { migrator } from "../test-migrations/config-migrations/migrator";
+import { migrator } from "../../../test-migrations/config-migrations/migrator";
+debugger
+
 describe("E2E test for product", () => {
     let sequelize: Sequelize
     let migration: Umzug<any>;
@@ -17,15 +19,15 @@ describe("E2E test for product", () => {
         sequelize.addModels([ProductModel])
         migration = migrator(sequelize)
         await migration.up()
-        await sequelize.sync({ force: true });
+        await sequelize.sync();
     })
 
     afterAll(async () => {
         if (!migration || !sequelize) {
             return 
           }
-          migration = migrator(sequelize)
-          await migration.down()
+        //   migration = migrator(sequelize)
+        //   await migration.down()
           await sequelize.close()
     })
 
@@ -34,6 +36,7 @@ describe("E2E test for product", () => {
             name: "Product 1",
             description: "Product 1 description",
             purchasePrice: 100,
+            salesPrice: 200,
             stock: 10
         });
 
@@ -41,6 +44,7 @@ describe("E2E test for product", () => {
         expect(response.body.name).toBe("Product 1");
         expect(response.body.description).toBe("Product 1 description");
         expect(response.body.purchasePrice).toBe(100);
+        expect(response.body.salesPrice).toBe(200);
         expect(response.body.stock).toBe(10);
     })
 
@@ -49,6 +53,7 @@ describe("E2E test for product", () => {
             name: null,
             description: "Product 1 description",
             purchasePrice: 100,
+            salesPrice: 200,
             stock: 10
         });
 

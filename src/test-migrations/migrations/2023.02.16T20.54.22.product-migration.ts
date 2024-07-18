@@ -2,7 +2,7 @@ import { DataTypes, Sequelize } from 'sequelize';
 import { MigrationFn } from 'umzug';
 
 export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().createTable('clients', {
+  await sequelize.getQueryInterface().createTable('products', {
     id: {
       type: DataTypes.STRING(255),
       primaryKey: true,
@@ -12,11 +12,19 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    email: {
+    description: {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    address: {
+    purchasePrice: {
+      type: DataTypes.NUMBER,
+      allowNull: true
+    },
+    salesPrice: {
+      type: DataTypes.NUMBER,
+      allowNull: true
+    },
+    stock:{
       type: DataTypes.NUMBER,
       allowNull: true
     },
@@ -32,5 +40,5 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
 };
 
 export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().dropTable('clients')
+  await sequelize.getQueryInterface().dropTable('products')
 } 
