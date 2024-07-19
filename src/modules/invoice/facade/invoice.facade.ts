@@ -28,11 +28,14 @@ export default class InvoiceFacade implements InvoiceFacadeInterface {
             city: result.city,
             state: result.state,
             zipCode: result.zipCode,
-            items: result.items.map((item: any) => ({
-                id: item.id,
-                name: item.name,
-                price: item.price,
-            }))
+            items: result.items.map((item: any) => {
+                return {
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+
+                }
+            })
         }
 
     }
@@ -49,11 +52,13 @@ export default class InvoiceFacade implements InvoiceFacadeInterface {
             city: result.address.city,
             state: result.address.state,
             zipCode: result.address.zipCode,
-            items: result.items.map((item: any) => ({
-                id: item.id,
-                name: item.name,
-                price: item.price,
-            })),
+            items: result.items.map((item: any) => {
+                return {
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                }
+            }),
         }
     }
 

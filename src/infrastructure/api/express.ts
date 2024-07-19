@@ -11,6 +11,7 @@ import OrderItemModel from "../../modules/checkout/repository/order-item.model";
 import { Umzug } from "umzug"
 import { migrator } from "../../test-migrations/config-migrations/migrator";
 import ProductStoreCatalogModel from "../../modules/store-catalog/repository/product.model";
+import { invoiceRoute } from "./routes/invoice.route";
 
 export const app: Express = express()
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/products', productRoute)
 app.use('/clients', clientRoute)
 app.use('/checkout', checkoutRoute)
+app.use('/invoice', invoiceRoute)
 
  export let sequelize: Sequelize;
 

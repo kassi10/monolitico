@@ -37,7 +37,6 @@ export default class OrderRepository implements CheckoutGateway {
             include: ["client", "items"],
         });
 
-        // console.log(orderModel)
         return new Order({
             id: new Id(id),
             client: new Client({

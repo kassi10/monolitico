@@ -100,7 +100,6 @@ describe("PlaceOrderUseCase unit test", () => {
 
         it("should place an order", async () => {
            
-
             const client = {
                 id: "1",
                 name: "Client 1",
@@ -111,7 +110,6 @@ describe("PlaceOrderUseCase unit test", () => {
           
               const factoryClient = ClientAdmFacadeFactory.create();
               await factoryClient.add(client);
-          
           
               const product1 = {
                 id: "1",

@@ -28,7 +28,6 @@ checkoutRoute.post("/", async (req, res) =>  {
         paymentFacade,
         new OrderRepository()
     )
-    console.log(req.body)
 
     try {
         const inputDto = {
@@ -41,7 +40,6 @@ checkoutRoute.post("/", async (req, res) =>  {
 
         res.send(output)
     } catch (err) {
-        console.log(err)
         res.status(500).send(err)
     }
 })

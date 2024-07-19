@@ -11,6 +11,7 @@ export default class GenerateInvoiceUseCase implements UseCaseInterface {
     constructor(private invoiceRepository: InvoiceGateway) { }
     async execute(input: GenerateInvoiceUseCaseInputDto): Promise<GenerateInvoiceUseCaseOutputDto> {
         const invoice = new Invoice({
+            id: new Id(input.id),
             name: input.name,
             document: input.document,
             address: new Address(

@@ -12,12 +12,11 @@ describe("InvoiceFacade test", () => {
         sequelize = new Sequelize({
             dialect: "sqlite",
             storage: ":memory:",
-            logging: false,
-            sync: { force: true },
+            logging: false
         });
 
         await sequelize.addModels([InvoiceItemModel, InvoiceModel]);
-        await sequelize.sync();
+        await sequelize.sync({force: true});
     });
 
     afterEach(async () => {
@@ -49,32 +48,10 @@ describe("InvoiceFacade test", () => {
                 }
             ]
         }
-        await InvoiceModel.create(
-            {
-                id: input.id,
-                name: input.name,
-                document: input.document,
-                street: input.street,
-                number: input.number,
-                complement: input.complement,
-                city: input.city,
-                state: input.state,
-                zipCode: input.zipCode
-            }
-        )
-
-        InvoiceItemModel.create(
-            {
-                id: input.items[0].id,
-                invoice_id: input.id,
-                name: input.items[0].name,
-                price: input.items[0].price
-            }
-        );
-
+        
         const invoiceFacade = InvoiceFacadeFactory.create();
-        await invoiceFacade.find({ id: input.id });
-        const output = await invoiceFacade.find(input);
+        const invoice = await invoiceFacade.generate(input);
+        const output = await invoiceFacade.find({ id: input.id });
 
         expect(output).toBeDefined();
         expect(output.id).toBe(input.id);
@@ -86,7 +63,7 @@ describe("InvoiceFacade test", () => {
         expect(output.city).toBe(input.city);
         expect(output.state).toBe(input.state);
         expect(output.zipCode).toBe(input.zipCode);
-        expect(output.items.length).toBe(1);
+        expect(output.items.length).toBe(2);
         expect(output.items[0].id).toBe(input.items[0].id);
         expect(output.items[0].name).toBe(input.items[0].name);
         expect(output.items[0].price).toBe(input.items[0].price);
@@ -117,35 +94,6 @@ describe("InvoiceFacade test", () => {
                 }
             ]
         }
-        await InvoiceModel.create(
-            {
-                id: input1.id,
-                name: input1.name,
-                document: input1.document,
-                street: input1.street,
-                number: input1.number,
-                complement: input1.complement,
-                city: input1.city,
-                state: input1.state,
-                zipCode: input1.zipCode
-            }
-        )
-
-        InvoiceItemModel.create(
-            {
-                id: input1.items[0].id,
-                invoice_id: input1.id,
-                name: input1.items[0].name,
-                price: input1.items[0].price
-            }
-        );
-
-        // const repository = new InvoiceRepository();
-        // const invoiceGenerateUseCase = new GenerateInvoiceUseCase(repository);
-        // const invoiceFacade = new InvoiceFacade({
-        //     findUseCase: undefined,
-        //     generateUseCase: invoiceGenerateUseCase
-        // });
 
         const invoiceFacade = InvoiceFacadeFactory.create();
         const output = await invoiceFacade.generate(input1);

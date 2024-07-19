@@ -105,16 +105,11 @@ describe("E2E test for checkout", () => {
       .post("/checkout")
       .send(inputDto);
 
-      console.log(response.body)
-    // expect(response.status).toEqual(200);
-    // expect(response.body.id).toBeDefined();
-    // expect(response.body.invoiceId).toBeDefined();
+
     expect(response.body.total).toEqual(800);
     expect(response.body.status).toEqual("approved");
 
-    // } catch (err) {
-    //   console.log(err)
-    // }
+
 
 
   })

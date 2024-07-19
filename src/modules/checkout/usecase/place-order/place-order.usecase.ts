@@ -77,7 +77,6 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       items: items
     }
     
-    console.log(invoiceInputDto)
     const invoice = payment.status === 'approved' ? await this._invoiceFacade.generate(invoiceInputDto) : null;
 
     payment.status === 'approved' && order.approved();
